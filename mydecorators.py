@@ -114,7 +114,7 @@ def synch(lock):
         @synch(my_lock)
         def func_one():
             pass
-        #synch(my_lock)
+        @synch(my_lock)
         def func_two():
             pass
     """
