@@ -21,13 +21,16 @@ def trace(func):
     return wrapper
 
 def pvm(func):
+    """
+    : prints out VM stack operations
+    """
     def wrapper(*args, **kwargs):
-        print('function name: ' + f.__name__)
-        print('  co_varnames:',f.__code__.co_varnames)
-        print('  co_names   :',f.__code__.co_names)
-        print('  co_consts  :',f.__code__.co_consts,'\n')
+        print('function name: ' + func.__name__)
+        print('  co_varnames:',func.__code__.co_varnames)
+        print('  co_names   :',func.__code__.co_names)
+        print('  co_consts  :',func.__code__.co_consts,'\n')
         print('Source Line  m  operation/byte-code      operand (useful name/number)\n'+69*'-')
-        dis.dis(f)
+        dis.dis(func)
         return func(*args, **kwargs)
     return wrapper
     
