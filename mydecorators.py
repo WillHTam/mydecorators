@@ -3,6 +3,7 @@ import functools
 import time
 import types
 import signal
+import dis
 
 def trace(func):
     """
@@ -19,6 +20,17 @@ def trace(func):
         return original_result
     return wrapper
 
+def pvm(func):
+    def wrapper(*args, **kwargs):
+        print('function name: ' + f.__name__)
+        print('  co_varnames:',f.__code__.co_varnames)
+        print('  co_names   :',f.__code__.co_names)
+        print('  co_consts  :',f.__code__.co_consts,'\n')
+        print('Source Line  m  operation/byte-code      operand (useful name/number)\n'+69*'-')
+        dis.dis(f)
+        return func(*args, **kwargs)
+    return wrapper
+    
 def timer(func):
     """
     : time function execution
